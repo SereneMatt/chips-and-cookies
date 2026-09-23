@@ -14,30 +14,30 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@tanstack/react-devtools": "latest",
-    "@tanstack/react-query": "latest",
-    "@tanstack/react-query-devtools": "latest",
-    "@tanstack/react-router": "latest",
-    "@tanstack/react-router-devtools": "latest",
-    "@tanstack/react-router-ssr-query": "latest",
-    "@tanstack/react-start": "latest",
-    "@vanilla-extract/css": "^1.21.2",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "valibot": "^1.0.0"
+    "@tanstack/react-devtools": "0.10.12",
+    "@tanstack/react-query": "5.103.2",
+    "@tanstack/react-query-devtools": "5.103.2",
+    "@tanstack/react-router": "1.170.38",
+    "@tanstack/react-router-devtools": "1.167.2",
+    "@tanstack/react-router-ssr-query": "1.167.3",
+    "@tanstack/react-start": "1.168.57",
+    "@vanilla-extract/css": "1.21.2",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "valibot": "1.5.0"
   },
   "devDependencies": {
-    "@cloudflare/vite-plugin": "^1.26.0",
-    "@tanstack/devtools-vite": "latest",
-    "@tanstack/router-cli": "^1.132.0",
-    "@types/node": "^22.10.2",
-    "@types/react": "^19.2.0",
-    "@types/react-dom": "^19.2.0",
-    "@vanilla-extract/vite-plugin": "^5.2.6",
-    "@vitejs/plugin-react": "^6.0.1",
-    "typescript": "^6.0.2",
-    "vite": "^8.0.0",
-    "wrangler": "^4.136.2"
+    "@cloudflare/vite-plugin": "1.57.2",
+    "@tanstack/devtools-vite": "0.8.5",
+    "@tanstack/router-cli": "1.167.38",
+    "@types/node": "22.20.4",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vanilla-extract/vite-plugin": "5.2.6",
+    "@vitejs/plugin-react": "6.1.1",
+    "typescript": "6.0.3",
+    "vite": "8.3.0",
+    "wrangler": "4.136.2"
   },
   "intent": {
     "skills": [
@@ -48,7 +48,7 @@
   "devEngines": {
     "packageManager": {
       "name": "nub",
-      "version": "^0.9.3",
+      "version": "0.9.3",
       "onFail": "ignore"
     }
   },
