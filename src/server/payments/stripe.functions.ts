@@ -1,5 +1,5 @@
 import { createServerFn } from '@tanstack/react-start'
-import { setResponseHeader } from '@tanstack/react-start/server'
+import { getRequest, setResponseHeader } from '@tanstack/react-start/server'
 import * as v from 'valibot'
 
 import { snacks } from '#/lib/snacks'
@@ -61,9 +61,9 @@ export const beginStripeCheckout = createServerFn({ method: 'POST' })
     const stripeKey = getStripeSecret()
     if (!stripeKey) throw new Error('Stripe checkout is not configured yet.')
     const shippingRate = process.env.STRIPE_SHIPPING_RATE_ID
-    const publicAppUrl = process.env.PUBLIC_APP_URL
-    if (!shippingRate || !publicAppUrl) {
-      throw new Error('Stripe setup is incomplete. Configure a shipping rate and public app URL.')
+    const publicAppUrl = process.env.PUBLIC_APP_URL || getRequest().url
+    if (!shippingRate) {
+      throw new Error('Stripe setup is incomplete. Configure a shipping rate.')
     }
     const appUrl = new URL(publicAppUrl)
     if (appUrl.protocol !== 'https:' && appUrl.hostname !== 'localhost') {

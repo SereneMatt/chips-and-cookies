@@ -36,9 +36,9 @@ const OrderConfirmationRoute = OrderConfirmationRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const ShopCartRoute = ShopCartRouteImport.update({
-  id: '/cart',
-  path: '/cart',
-  getParentRoute: () => ShopRoute,
+  id: '/shop/cart',
+  path: '/shop/cart',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -92,6 +92,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   DemoTanstackQueryRoute: typeof DemoTanstackQueryRoute
   OrderConfirmationRoute: typeof OrderConfirmationRoute
+  ShopCartRoute: typeof ShopCartRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -126,10 +127,10 @@ declare module '@tanstack/react-router' {
     }
     '/shop/cart': {
       id: '/shop/cart'
-      path: '/cart'
+      path: '/shop/cart'
       fullPath: '/shop/cart'
       preLoaderRoute: typeof ShopCartRouteImport
-      parentRoute: typeof ShopRoute
+      parentRoute: typeof rootRouteImport
     }
   }
 }
@@ -139,6 +140,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   DemoTanstackQueryRoute: DemoTanstackQueryRoute,
   OrderConfirmationRoute: OrderConfirmationRoute,
+  ShopCartRoute: ShopCartRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
