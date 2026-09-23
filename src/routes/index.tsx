@@ -4,6 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { beginStripeCheckout } from "#/server/payments/stripe.functions";
 import { money, snacks, type Snack } from "#/data/snacks";
+import { Icon } from "#/components/Icon";
+import { StoreFooter } from "#/components/StoreFooter";
+import { StoreHeader } from "#/components/StoreHeader";
 
 export const Route = createFileRoute("/")({
   loader: () => ({ products: snacks }),
@@ -24,28 +27,6 @@ export const Route = createFileRoute("/")({
   ),
   component: Storefront
 });
-
-function Icon({ name }: { name: "bag" | "arrow" | "search" | "close" }) {
-  return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
-      {name === "bag" ? (
-        <>
-          <path d="M5 7h14l1 14H4L5 7Z" />
-          <path d="M8 8V6a4 4 0 0 1 8 0v2" />
-        </>
-      ) : name === "arrow" ? (
-        <path d="M4 12h15m-6-6 6 6-6 6" />
-      ) : name === "search" ? (
-        <>
-          <circle cx="10.5" cy="10.5" r="6.5" />
-          <path d="m16 16 5 5" />
-        </>
-      ) : (
-        <path d="m6 6 12 12M6 18 18 6" />
-      )}
-    </svg>
-  );
-}
 
 function Storefront() {
   const { products } = Route.useLoaderData();
@@ -120,24 +101,7 @@ function Storefront() {
   const displayedCount = count;
   return (
     <>
-      <div className={styles.announcement}>
-        GOOD SNACKS. GREAT LITTLE MOMENTS. <span>✦</span> SWEET MEETS SALTY.
-      </div>
-      <header className={styles.storeHeader}>
-        <a className={styles.wordmark} href="/">
-          chips<span>&</span>cookies<span className={styles.brandDot}>®</span>
-        </a>
-        <nav aria-label="Main navigation">
-          <a href="#catalogue">The snack shop</a>
-          <a href="#story">Our little story</a>
-          <a href="#faq">Good to know</a>
-        </nav>
-        <button className={styles.bagButton} onClick={openBag} aria-label={`Open shopping bag, ${displayedCount} items`}>
-          <Icon name="bag" />
-          <span>Bag</span>
-          <b>{displayedCount}</b>
-        </button>
-      </header>
+      <StoreHeader itemCount={displayedCount} onOpenBag={openBag} />
       <main>
         <section className={styles.hero}>
           <div className={styles.heroCopy}>
@@ -291,14 +255,7 @@ function Storefront() {
           </details>
         </section>
       </main>
-      <footer className={styles.storeFooter}>
-        <a className={styles.wordmark} href="/">
-          chips<span>&</span>cookies
-        </a>
-        <p>A little crunch. A lot of joy.</p>
-        <a href="#catalogue">Back to the good stuff ↑</a>
-        <small>© {new Date().getFullYear()} Chips & Cookies. Sweet meets salty.</small>
-      </footer>
+      <StoreFooter />
       <div role="status" className={`${styles.toast} ${notice ? styles.visible : ""}`}>
         {notice}
       </div>
