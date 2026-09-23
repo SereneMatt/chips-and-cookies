@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { beginStripeCheckout } from "#/server/payments/stripe.functions";
-import { money, snacks, type Snack } from "#/lib/snacks";
+import { money, snacks, type Snack } from "#/data/snacks";
 
 export const Route = createFileRoute("/")({
   loader: () => ({ products: snacks }),

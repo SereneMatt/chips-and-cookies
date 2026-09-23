@@ -3,7 +3,7 @@ import { useServerFn } from '@tanstack/react-start'
 import { useEffect, useMemo, useState } from 'react'
 
 import { beginStripeCheckout } from '#/server/payments/stripe.functions'
-import { snacks } from '#/lib/snacks'
+import { snacks } from '#/data/snacks'
 import * as styles from '#/styles/custom-cart.css'
 
 const CART_KEY = 'chips-cookies-bag'

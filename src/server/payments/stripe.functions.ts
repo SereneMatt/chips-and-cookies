@@ -2,7 +2,7 @@ import { createServerFn } from '@tanstack/react-start'
 import { getRequest, setResponseHeader } from '@tanstack/react-start/server'
 import * as v from 'valibot'
 
-import { snacks } from '#/lib/snacks'
+import { snacks } from '#/data/snacks'
 
 const SESSION_ID = /^cs_(test|live)_[A-Za-z0-9]+$/
 const checkoutInput = v.object({

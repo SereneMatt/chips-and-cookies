@@ -20,7 +20,7 @@ export const snacks: Snack[] = [
     description: "Thin-cut cassava chips with a satisfying crunch and a sprinkle of sea salt. 150g bag.",
     price: 4.5,
     currency: "USD",
-    image: "/images/chips.png",
+    image: "/images/chips.jpg",
     badge: "SALTY SIDE",
     available: true
   },
@@ -44,7 +44,7 @@ export const snacks: Snack[] = [
     description: "Why choose? Your favorite chocolate chip cookies meet our sea salt cassava chips. Contains wheat, milk, eggs and soy.",
     price: 20,
     currency: "USD",
-    image: "/images/chips.png",
+    image: "/images/chips.jpg",
     badge: "THE PERFECT PAIR",
     available: true
   }
