@@ -20,4 +20,9 @@ An online storefront (boosting existing https://order.sweet-butter.com).
 
 ## Development
 
-- nub
+To run this application:
+
+```bash
+nub install
+nub run dev
+```
