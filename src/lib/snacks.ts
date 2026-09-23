@@ -17,10 +17,10 @@ export const snacks: Snack[] = [
     handle: "sea-salt-crunch",
     name: "Sea salt & sunshine",
     category: "Chips",
-    description: "Thin-cut potato chips with a satisfying crunch and a sprinkle of sea salt. 150g bag.",
+    description: "Thin-cut cassava chips with a satisfying crunch and a sprinkle of sea salt. 150g bag.",
     price: 4.5,
     currency: "USD",
-    image: "/images/chips.jpg",
+    image: "/images/chips.png",
     badge: "SALTY SIDE",
     available: true
   },
@@ -41,10 +41,10 @@ export const snacks: Snack[] = [
     handle: "sweet-salty-box",
     name: "A little bit of both",
     category: "Bundles",
-    description: "Why choose? Your favorite chocolate chip cookies meet our sea salt potato chips. Contains wheat, milk, eggs and soy.",
+    description: "Why choose? Your favorite chocolate chip cookies meet our sea salt cassava chips. Contains wheat, milk, eggs and soy.",
     price: 20,
     currency: "USD",
-    image: "/images/chips.jpg",
+    image: "/images/chips.png",
     badge: "THE PERFECT PAIR",
     available: true
   }
