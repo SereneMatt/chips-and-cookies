@@ -1,7 +1,0 @@
-# Copy to .dev.vars for Cloudflare local development. Never commit credentials.
-# Stripe Checkout for Cash App Pay. Requires a US Stripe business, USD catalogue
-# prices, and a USD shipping rate configured in the Stripe Dashboard.
-STRIPE_SECRET_KEY=sk_test_replace_me
-STRIPE_SHIPPING_RATE_ID=shr_replace_me
-# Optional; defaults to this request's host (including a Workers Preview URL).
-# PUBLIC_APP_URL=https://chips-and-cookies.example.com
