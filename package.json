@@ -11,6 +11,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "deploy": "nub run build && wrangler deploy",
+    "wrangler:deploy": "wrangler deploy",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
