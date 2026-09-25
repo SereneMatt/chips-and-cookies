@@ -26,3 +26,15 @@ To run this application:
 nub install
 nub run dev
 ```
+
+## Deployment
+```bash
+nub exec wrangler deploy
+```
+
+## Stripe checkout
+
+Stripe-hosted Checkout with Cash App Pay. Follow the
+[Stripe setup guide](docs/stripe-setup.md) to configure local test payments,
+Cloudflare variables, and live credentials. The guide also lists the remaining
+idempotency and order-fulfillment work needed before accepting real orders.
