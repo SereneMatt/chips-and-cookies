@@ -10,8 +10,7 @@
     "generate-routes": "tsr generate",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy": "nub run build && wrangler deploy",
-    "wrangler:deploy": "wrangler deploy",
+    "deploy": "cf deploy",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -36,6 +35,7 @@
     "@types/react-dom": "19.3.0",
     "@vanilla-extract/vite-plugin": "5.2.6",
     "@vitejs/plugin-react": "6.1.1",
+    "cf": "1.0.0-beta.5",
     "skills": "1.7.0",
     "typescript": "6.0.3",
     "vite": "8.3.0",

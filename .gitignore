@@ -7,6 +7,7 @@ dist-ssr
 .nitro
 .tanstack
 .wrangler
+.cloudflare
 .output
 .vinxi
 __unconfig*
@@ -14,4 +15,5 @@ todos.json
 
 .dev.vars*
 !.dev.vars.example
+.deploy-secrets.json
 .vscode/

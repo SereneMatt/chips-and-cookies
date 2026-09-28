@@ -23,7 +23,14 @@ const config = defineConfig({
   plugins: [
     devtools(),
     vanillaExtractCloudflareCompatibility,
-    cloudflare({ viteEnvironment: { name: 'ssr' } }),
+    cloudflare({
+      viteEnvironment: { name: 'ssr' },
+      experimental: {
+        // Read cloudflare.config.ts. `cf build` / `cf deploy` also force the
+        // Build Output Specification via CLOUDFLARE_VITE_FORCE_BUILD_OUTPUT.
+        newConfig: { types: { generate: false } },
+      },
+    }),
     vanillaExtractPlugin(),
     tanstackStart(),
     viteReact(),
