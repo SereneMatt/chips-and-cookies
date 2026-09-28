@@ -29,8 +29,14 @@ nub run dev
 
 ## Deployment
 ```bash
-nub exec wrangler deploy
+nub exec cf auth login
+nub run deploy
 ```
+
+`nub run deploy` runs `cf deploy`, which builds the Worker and uploads it.
+Configuration lives in `cloudflare.config.ts`. Local development stays
+`nub run dev` (`vite dev --port 3000`). `cf dev` also starts Vite, but it
+cannot forward `--port`.
 
 ## Stripe checkout
 

@@ -58,20 +58,50 @@ existing integration with simulated payments, including server verification.
 
 ## Cloudflare configuration
 
-After local testing, sign in and store the secret interactively:
+After local testing, sign in and store the secret:
 
 ```bash
-nub exec wrangler login
-nub exec wrangler secret put STRIPE_SECRET_KEY
+nub exec cf auth login
 ```
 
-Merge a `vars` object into `wrangler.jsonc`, keeping its existing settings:
+A Wrangler login does not carry over. `cf auth login` stores its own credentials.
+
+`cf` has no interactive `secret put` prompt. Set the Stripe secret with the
+value in a shell variable so it is not written into the command itself:
+
+```bash
+nub exec cf workers secrets update STRIPE_SECRET_KEY \
+  --worker chips-and-cookies \
+  --type secret_text \
+  --text "$STRIPE_SECRET_KEY"
+```
+
+This adds the secret to an existing Worker by creating a Worker version. On the first deploy, pass a gitignored JSON
+file instead. `.deploy-secrets.json` is ignored:
 
 ```json
-"vars": {
-  "STRIPE_SHIPPING_RATE_ID": "shr_replace_with_your_rate",
-  "PUBLIC_APP_URL": "https://your-store.example.com"
-}
+{ "STRIPE_SECRET_KEY": "sk_test_replace_with_your_key" }
+```
+
+```bash
+nub exec cf deploy --secrets-file .deploy-secrets.json
+```
+
+Plaintext Worker variables belong in `cloudflare.config.ts`. Import
+`bindings` from `cf/config` and add them to the existing `worker` object:
+
+```ts
+import { bindings, defineConfig } from 'cf/config'
+
+export default defineConfig({
+  worker: {
+    // name, compatibilityDate, compatibilityFlags, and entrypoint stay as they are
+    env: {
+      STRIPE_SHIPPING_RATE_ID: bindings.text('shr_replace_with_your_rate'),
+      PUBLIC_APP_URL: bindings.text('https://your-store.example.com'),
+    },
+  },
+})
 ```
 
 Use test credentials for a test deployment. For real payments, activate the
