@@ -34,48 +34,100 @@ export const snowGround = style({
   boxShadow: '0 -2px 20px #ffffff80',
 })
 
+/** Rolls in from off-screen with three soft hops, then settles. */
 const travel = keyframes({
-  from: { transform: 'translateX(calc(-50vw - 100%))' },
-  to: { transform: 'translateX(-50%)' },
+  '0%': { transform: 'translateX(calc(-50vw - 100%)) translateY(0) scale(1, 1)' },
+  '18%': { transform: 'translateX(calc(-38vw - 70%)) translateY(-28px) scale(0.96, 1.04)' },
+  '28%': { transform: 'translateX(calc(-30vw - 55%)) translateY(0) scale(1.06, 0.94)' },
+  '38%': { transform: 'translateX(calc(-22vw - 40%)) translateY(-20px) scale(0.97, 1.03)' },
+  '48%': { transform: 'translateX(calc(-14vw - 25%)) translateY(0) scale(1.04, 0.96)' },
+  '60%': { transform: 'translateX(calc(-6vw - 10%)) translateY(-12px) scale(0.98, 1.02)' },
+  '72%': { transform: 'translateX(-50%) translateY(0) scale(1.03, 0.97)' },
+  '82%': { transform: 'translateX(-50%) translateY(-4px) scale(0.99, 1.01)' },
+  '90%': { transform: 'translateX(-50%) translateY(0) scale(1.01, 0.99)' },
+  '100%': { transform: 'translateX(-50%) translateY(0) scale(1, 1)' },
 })
+
+/** Spin that matches the hop journey, with a tiny overshoot into place. */
 const roll = keyframes({
-  from: { transform: 'rotate(-540deg)' },
-  to: { transform: 'rotate(0deg)' },
+  '0%': { transform: 'rotate(-720deg)' },
+  '72%': { transform: 'rotate(8deg)' },
+  '82%': { transform: 'rotate(-4deg)' },
+  '92%': { transform: 'rotate(2deg)' },
+  '100%': { transform: 'rotate(0deg)' },
 })
+
+/** Soft breathing wobble once the cookie has arrived. */
+const idle = keyframes({
+  '0%, 100%': { transform: 'translateX(-50%) translateY(0) rotate(0deg)' },
+  '35%': { transform: 'translateX(-50%) translateY(-3px) rotate(-1.5deg)' },
+  '70%': { transform: 'translateX(-50%) translateY(-1px) rotate(1.2deg)' },
+})
+
+const gleam = keyframes({
+  '0%, 100%': { opacity: 0.15, transform: 'scale(0.85)' },
+  '50%': { opacity: 0.55, transform: 'scale(1.05)' },
+})
+
 export const traveler = style({
   position: 'absolute', bottom: 46, left: '50%',
   width: 'clamp(180px, 24vw, 260px)', height: 'clamp(180px, 24vw, 260px)',
   transform: 'translateX(-50%)',
-  animation: `${travel} 3.5s cubic-bezier(0.22, 1, 0.36, 1) both`,
+  transformOrigin: '50% 85%',
+  animation: `${travel} 3.2s cubic-bezier(0.22, 1, 0.36, 1) both, ${idle} 3.6s ease-in-out 3.2s infinite`,
   '@media': { '(prefers-reduced-motion: reduce)': { animation: 'none' } },
 })
+
 export const cookie = style({
   display: 'block', width: '100%', height: '100%',
   filter: 'drop-shadow(0 8px 4px #5a392522)',
-  animation: `${roll} 3.5s cubic-bezier(0.22, 1, 0.36, 1) both`,
+  transformOrigin: '50% 50%',
+  animation: `${roll} 3.2s cubic-bezier(0.22, 1, 0.36, 1) both`,
   '@media': { '(prefers-reduced-motion: reduce)': { animation: 'none' } },
 })
+
+export const chipGleam = style({
+  transformOrigin: 'center',
+  animation: `${gleam} 2.8s ease-in-out 3.4s infinite`,
+  '@media': { '(prefers-reduced-motion: reduce)': { animation: 'none', opacity: 0.35 } },
+})
+
 export const snowFront = style({
   position: 'absolute', width: '120%', left: '-10%', height: 77, bottom: -25,
   borderRadius: '45% 70% 0 0', background: '#ffffff', transform: 'rotate(2deg)',
 })
 
 const rotateWord = keyframes({
-  '0%, 40%, 100%': { opacity: 1, transform: 'translateY(0)' },
-  '48%': { opacity: 0, transform: 'translateY(-0.3em)' },
-  '50%, 90%': { opacity: 0, transform: 'translateY(0.3em)' },
+  // Linear opacity hold + longer crossfade; salt uses -3s (half-cycle) delay.
+  '0%, 42%': { opacity: 1 },
+  '50%': { opacity: 0 },
+  '50.01%, 92%': { opacity: 0 },
+  '100%': { opacity: 1 },
 })
 
 export const words = style({
   display: 'inline-grid',
+  position: 'relative',
   verticalAlign: 'baseline',
+  justifyItems: 'start',
   color: 'var(--orange)',
   fontWeight: 500,
+  fontStyle: 'italic',
+})
+
+/** Locks width to the longer label so the heading never reflows. */
+export const wordMeasure = style({
+  gridArea: '1 / 1',
+  visibility: 'hidden',
+  whiteSpace: 'nowrap',
+  pointerEvents: 'none',
+  userSelect: 'none',
 })
 
 export const word = style({
   gridArea: '1 / 1',
-  animation: `${rotateWord} 6s ease-in-out infinite`,
+  whiteSpace: 'nowrap',
+  animation: `${rotateWord} 6s linear infinite`,
   '@media': {
     '(prefers-reduced-motion: reduce)': { animation: 'none' },
   },
@@ -86,4 +138,11 @@ export const salt = style({
   '@media': {
     '(prefers-reduced-motion: reduce)': { visibility: 'hidden' },
   },
+})
+
+/** Period rides with each word but uses the root text color, not orange. */
+export const period = style({
+  color: '#34291f',
+  fontStyle: 'normal',
+  fontWeight: 'inherit',
 })

@@ -1,11 +1,13 @@
 import { button, desktopBreak } from '#/styles/storefront.css'
 import {
+  chipGleam,
   cookie,
   copy,
   description,
   heading,
   hero,
   note,
+  period,
   salt,
   scene,
   snowBack,
@@ -13,6 +15,7 @@ import {
   snowGround,
   traveler,
   word,
+  wordMeasure,
   words,
 } from './Hero.css'
 import { Icon } from './Icon'
@@ -25,8 +28,15 @@ export function Hero() {
           A little crunch.
           <br />A lot of{' '}
           <em className={words} aria-label="sweet and salt">
-            <span className={word} aria-hidden="true">sweet.</span>
-            <span className={`${word} ${salt}`} aria-hidden="true">salt.</span>
+            <span className={wordMeasure} aria-hidden="true">
+              sweet<span className={period}>.</span>
+            </span>
+            <span className={word} aria-hidden="true">
+              sweet<span className={period}>.</span>
+            </span>
+            <span className={`${word} ${salt}`} aria-hidden="true">
+              salt<span className={period}>.</span>
+            </span>
           </em>
         </h1>
         <p className={description}>
@@ -52,6 +62,10 @@ export function Hero() {
               <circle cx="46" cy="22" r="2" /><circle cx="36" cy="48" r="2" />
               <circle cx="63" cy="73" r="2" /><circle cx="25" cy="70" r="2" />
               <circle cx="78" cy="36" r="2" /><circle cx="49" cy="82" r="2" />
+            </g>
+            <g className={chipGleam} fill="#fff8e8">
+              <ellipse cx="33" cy="28" rx="2.2" ry="1.4" transform="rotate(-28 33 28)" opacity="0.7" />
+              <ellipse cx="62" cy="44" rx="1.8" ry="1.1" transform="rotate(18 62 44)" opacity="0.55" />
             </g>
           </svg>
         </div>
