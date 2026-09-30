@@ -6,6 +6,7 @@ import { beginStripeCheckout } from "#/server/payments/stripe.functions";
 import { money, type Snack } from "#/data/snacks";
 import { Icon } from "#/components/Icon";
 import { StoreFooter } from "#/components/StoreFooter";
+import { Hero } from "#/components/Hero";
 import { StoreHeader } from "#/components/StoreHeader";
 
 const route = getRouteApi("/");
@@ -85,40 +86,7 @@ export function Home() {
     <>
       <StoreHeader itemCount={displayedCount} onOpenBag={openBag} />
       <main>
-        <section className={styles.hero}>
-          <div className={styles.heroCopy}>
-            <span className={styles.eyebrow}>
-              <span className={styles.tinySpark}>✳</span> MADE FOR YOUR SNACK BREAK
-            </span>
-            <h1>
-              A little crunch.
-              <br />A lot of <em>sweetness.</em>
-            </h1>
-            <p>
-              Soft cookies. Crispy chips. The sweet and salty
-              <br className={styles.desktopBreak} /> little things that make your day a whole lot better.
-            </p>
-            <a className={styles.button} href="#catalogue">
-              Find your happy snack <Icon name="arrow" />
-            </a>
-            <div className={styles.heroNote}>
-              <span>♡</span> For sharing. Or keeping all to yourself.
-            </div>
-          </div>
-          <div className={styles.heroPhoto}>
-            <img src="/images/cookies.jpg" alt="Fresh chocolate chip cookies cooling on a wire rack" fetchPriority="high" />
-            <div className={styles.roundStamp}>
-              SWEET + SALTY
-              <span>
-                the perfect
-                <br />
-                <em>little break</em>
-              </span>
-              HAPPINESS INSIDE
-            </div>
-            <div className={styles.photoCaption}>Meet your new everyday favorites. ↗</div>
-          </div>
-        </section>
+        <Hero />
         <div className={styles.promiseStrip}>
           <span>✳ A little sweet</span>
           <span>✧ A little salty</span>

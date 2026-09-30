@@ -1,6 +1,6 @@
 # chips-and-cookies
 
-An online storefront (boosting existing https://order.sweet-butter.com).
+An online cookie store (boosting existing https://order.sweet-butter.com).
 
 ## Project Status
 
@@ -12,7 +12,7 @@ An online storefront (boosting existing https://order.sweet-butter.com).
 - Shopping cart
 - Payment
 - Order confirmation
-- Responsive
+- Mobile and web platforms
 
 ## Tech Stack
 
@@ -28,6 +28,7 @@ nub run dev
 ```
 
 ## Deployment
+
 ```bash
 nub exec cf auth login
 nub run deploy
