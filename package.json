@@ -11,7 +11,11 @@
     "build": "vite build",
     "preview": "vite preview",
     "deploy": "cf deploy",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check"
   },
   "dependencies": {
     "@tanstack/react-devtools": "0.10.12",
@@ -28,6 +32,7 @@
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "1.57.2",
+    "@oxlint/plugins": "1.86.0",
     "@tanstack/devtools-vite": "0.8.5",
     "@tanstack/router-cli": "1.167.38",
     "@types/node": "22.20.4",
@@ -36,6 +41,8 @@
     "@vanilla-extract/vite-plugin": "5.2.6",
     "@vitejs/plugin-react": "6.1.1",
     "cf": "1.0.0-beta.5",
+    "oxfmt": "0.71.0",
+    "oxlint": "1.86.0",
     "skills": "1.7.0",
     "typescript": "6.0.3",
     "vite": "8.3.0",
