@@ -1,5 +1,5 @@
-import * as styles from '#/styles/storefront.css'
-import { Icon } from './Icon'
+import * as styles from "#/styles/storefront.css";
+import { Icon } from "./Icon";
 
 export function StoreHeader({ itemCount, onOpenBag }: { itemCount: number; onOpenBag: () => void }) {
   return (
@@ -23,5 +23,5 @@ export function StoreHeader({ itemCount, onOpenBag }: { itemCount: number; onOpe
         </button>
       </header>
     </>
-  )
+  );
 }

@@ -1,4 +1,5 @@
 export type Snack = { id: string; handle: string; name: string; category: string; description: string; price: number; currency: string; image: string; badge?: string; available: boolean };
+
 export const snacks: Snack[] = [
   {
     id: "classic-cookie",
@@ -49,4 +50,5 @@ export const snacks: Snack[] = [
     available: true
   }
 ];
+
 export const money = (price: number, currency = "EUR") => new Intl.NumberFormat("en-IE", { style: "currency", currency }).format(price);

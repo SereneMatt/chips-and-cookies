@@ -1,4 +1,6 @@
-import * as styles from '#/styles/storefront.css'
+import * as styles from "#/styles/storefront.css";
+
+const copyrightYear = new Date().getFullYear();
 
 export function StoreFooter() {
   return (
@@ -8,7 +10,7 @@ export function StoreFooter() {
       </a>
       <p>A little crunch. A lot of joy.</p>
       <a href="#catalogue">Back to the good stuff ↑</a>
-      <small>© {new Date().getFullYear()} Chips & Cookies. Sweet meets salty.</small>
+      <small>© {copyrightYear} Chips & Cookies. Sweet meets salty.</small>
     </footer>
-  )
+  );
 }

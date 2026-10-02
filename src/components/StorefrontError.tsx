@@ -1,5 +1,5 @@
-import type { ErrorComponentProps } from '@tanstack/react-router'
-import * as styles from '#/styles/storefront.css'
+import type { ErrorComponentProps } from "@tanstack/react-router";
+import * as styles from "#/styles/storefront.css";
 
 export function StorefrontError({ reset }: ErrorComponentProps) {
   return (
@@ -10,5 +10,5 @@ export function StorefrontError({ reset }: ErrorComponentProps) {
         Try again
       </button>
     </main>
-  )
+  );
 }

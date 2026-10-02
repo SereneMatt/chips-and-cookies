@@ -1,6 +1,6 @@
-import * as styles from '#/styles/storefront.css'
+import * as styles from "#/styles/storefront.css";
 import { getRouteApi } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { beginStripeCheckout } from "#/server/payments/stripe.functions";
 import { money, type Snack } from "#/data/snacks";
@@ -10,6 +10,24 @@ import { Hero } from "#/components/Hero";
 import { StoreHeader } from "#/components/StoreHeader";
 
 const route = getRouteApi("/");
+
+const storageKey = "chips-cookies-bag";
+
+const subscribeIsClient = () => () => {};
+
+function readBag(products: Snack[]): Record<string, number> {
+  try {
+    const saved: unknown = JSON.parse(localStorage.getItem(storageKey) || "{}");
+
+    if (saved && typeof saved === "object" && !Array.isArray(saved)) {
+      return Object.fromEntries(Object.entries(saved).filter(([id, q]) => products.some((p) => p.id === id) && typeof q === "number" && Number.isInteger(q) && q > 0 && q <= 99));
+    }
+  } catch {
+    /* An unavailable or corrupted browser store starts an empty bag. */
+  }
+
+  return {};
+}
 
 export function Home() {
   const { products } = route.useLoaderData();
@@ -25,18 +43,17 @@ export function Home() {
   const startCheckout = useServerFn(beginStripeCheckout);
   const bag = useRef<HTMLDialogElement>(null);
   const detail = useRef<HTMLDialogElement>(null);
-  const storageKey = "chips-cookies-bag";
-  useEffect(() => {
-    try {
-      const saved: unknown = JSON.parse(localStorage.getItem(storageKey) || "{}");
-      if (saved && typeof saved === "object" && !Array.isArray(saved)) {
-        setQuantities(Object.fromEntries(Object.entries(saved).filter(([id, q]) => products.some((p) => p.id === id) && typeof q === "number" && Number.isInteger(q) && q > 0 && q <= 99)));
-      }
-    } catch {
-      /* An unavailable or corrupted browser store starts an empty bag. */
-    }
+  const isClient = useSyncExternalStore(
+    subscribeIsClient,
+    () => true,
+    () => false
+  );
+
+  if (isClient && !ready) {
     setReady(true);
-  }, [storageKey, products]);
+    setQuantities(readBag(products));
+  }
+
   useEffect(() => {
     if (ready) {
       try {
@@ -45,34 +62,41 @@ export function Home() {
         /* Shopping still works without persistence. */
       }
     }
-  }, [quantities, ready, storageKey]);
+  }, [quantities, ready]);
   useEffect(() => {
     if (!notice) return;
     const timer = setTimeout(() => setNotice(""), 2500);
+
     return () => clearTimeout(timer);
   }, [notice]);
   const lines = products.filter((p) => quantities[p.id]).map((p) => ({ ...p, quantity: quantities[p.id] }));
   const count = lines.reduce((sum, p) => sum + p.quantity, 0);
   const currencies = [...new Set(lines.map((p) => p.currency))];
   const total = lines.reduce((sum, p) => sum + p.price * p.quantity, 0);
+
   const shown = products
     .filter((p) => (category === "All snacks" || p.category === category) && p.name.toLowerCase().includes(query.toLowerCase()))
     .sort((a, b) => (sort === "low" ? a.price - b.price : sort === "high" ? b.price - a.price : 0));
+
   function add(p: Snack) {
     setQuantities((q) => ({ ...q, [p.id]: Math.min(99, (q[p.id] || 0) + 1) }));
     setNotice(`${p.name} added to your bag`);
   }
+
   function change(id: string, delta: number) {
     setQuantities((q) => ({ ...q, [id]: Math.max(0, Math.min(99, (q[id] || 0) + delta)) }));
     setError("");
   }
+
   function openBag() {
     setError("");
     bag.current?.showModal();
   }
+
   async function pay() {
     setCheckoutPending(true);
     setError("");
+
     try {
       const result = await startCheckout({ data: { items: lines.map(({ id, quantity }) => ({ id, quantity })) } });
       window.location.assign(result.checkoutUrl);
@@ -81,7 +105,9 @@ export function Home() {
       setCheckoutPending(false);
     }
   }
+
   const displayedCount = count;
+
   return (
     <>
       <StoreHeader itemCount={displayedCount} onOpenBag={openBag} />
@@ -190,7 +216,7 @@ export function Home() {
           <h2>A few little details.</h2>
           <details>
             <summary>How does ordering work?</summary>
-              <p>Choose your snacks and add them to your bag. Secure Cash App Pay and order confirmation are handled through Stripe Checkout.</p>
+            <p>Choose your snacks and add them to your bag. Secure Cash App Pay and order confirmation are handled through Stripe Checkout.</p>
           </details>
           <details>
             <summary>What about ingredients and allergens?</summary>
