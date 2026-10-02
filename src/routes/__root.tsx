@@ -1,9 +1,12 @@
-import * as styles from '#/styles/storefront.css'
+import * as styles from "#/styles/storefront.css";
 import { HeadContent, Scripts, createRootRouteWithContext, useRouterState } from "@tanstack/react-router";
 import type { QueryClient } from "@tanstack/react-query";
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({ meta: [{ charSet: "utf-8" }, { name: "viewport", content: "width=device-width, initial-scale=1" }, { title: "Chips & Cookies" }], links: [{ rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" }] }),
+  head: () => ({
+    meta: [{ charSet: "utf-8" }, { name: "viewport", content: "width=device-width, initial-scale=1" }, { title: "Chips & Cookies" }],
+    links: [{ rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" }]
+  }),
   notFoundComponent: () => (
     <main className={styles.errorPage}>
       <h1>Just crumbs here.</h1>
@@ -15,8 +18,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   ),
   shellComponent: RootDocument
 });
+
 function RootDocument({ children }: { children: React.ReactNode }) {
   const home = useRouterState({ select: (s) => s.location.pathname === "/" });
+
   return (
     <html lang="en">
       <head>
