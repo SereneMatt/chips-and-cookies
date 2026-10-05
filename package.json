@@ -32,7 +32,6 @@
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "1.57.2",
-    "@oxlint/plugins": "1.86.0",
     "@tanstack/devtools-vite": "0.8.5",
     "@tanstack/router-cli": "1.167.38",
     "@types/node": "22.20.4",
